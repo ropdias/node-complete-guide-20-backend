@@ -19,7 +19,7 @@ Section 25 covered:
 - [X] Understanding the Frontend Setup
 - [x] Planning the API
 - [x] Fetching Lists of Posts
-- [ ] Adding a Create Post Endpoint
+- [x] Adding a Create Post Endpoint
 - [ ] Adding Server Side Validation
 - [ ] Setting Up a Post Model
 - [ ] Storing Posts in the Database
