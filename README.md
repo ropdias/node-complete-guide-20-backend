@@ -17,8 +17,8 @@ Section 25 covered:
 
 - [X] REST APIs & The Rest Of The Course
 - [X] Understanding the Frontend Setup
-- [ ] Planning the API
-- [ ] Fetching Lists of Posts
+- [x] Planning the API
+- [x] Fetching Lists of Posts
 - [ ] Adding a Create Post Endpoint
 - [ ] Adding Server Side Validation
 - [ ] Setting Up a Post Model
