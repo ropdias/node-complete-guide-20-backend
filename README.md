@@ -20,7 +20,7 @@ Section 25 covered:
 - [x] Planning the API
 - [x] Fetching Lists of Posts
 - [x] Adding a Create Post Endpoint
-- [ ] Adding Server Side Validation
+- [x] Adding Server Side Validation
 - [ ] Setting Up a Post Model
 - [ ] Storing Posts in the Database
 - [ ] Static Images & Error Handling
