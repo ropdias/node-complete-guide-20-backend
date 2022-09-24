@@ -23,7 +23,7 @@ Section 25 covered:
 - [x] Adding Server Side Validation
 - [x] Setting Up a Post Model
 - [x] Storing Posts in the Database
-- [ ] Static Images & Error Handling
+- [x] Static Images & Error Handling
 - [ ] Fetching a Single Post
 - [ ] Uploading Images
 - [ ] Updating Posts
