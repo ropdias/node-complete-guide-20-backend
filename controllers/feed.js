@@ -1,5 +1,7 @@
 const { validationResult } = require("express-validator");
 
+const Post = require("../models/post");
+
 exports.getPosts = (req, res, next) => {
   res.status(200).json({
     posts: [
@@ -27,15 +29,21 @@ exports.createPost = (req, res, next) => {
   }
   const title = req.body.title;
   const content = req.body.content;
-  // Create post in db
-  res.status(201).json({
-    message: "Post created successfully!",
-    post: {
-      _id: new Date().toISOString(),
-      title: title,
-      content: content,
-      creator: { name: "Rodrigo" },
-      createdAt: new Date(),
-    },
+  // We don't need to add createdAt, mongoose will add automatically because of "timestamp: true"
+  const post = new Post({
+    title: title,
+    content: content,
+    imageUrl: 'images/book2.png',
+    creator: { name: "Rodrigo" },
   });
+  post
+    .save()
+    .then((result) => {
+      console.log(result);
+      res.status(201).json({
+        message: "Post created successfully!",
+        post: result,
+      });
+    })
+    .catch((err) => console.log(err));
 };

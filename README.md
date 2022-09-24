@@ -22,7 +22,7 @@ Section 25 covered:
 - [x] Adding a Create Post Endpoint
 - [x] Adding Server Side Validation
 - [x] Setting Up a Post Model
-- [ ] Storing Posts in the Database
+- [x] Storing Posts in the Database
 - [ ] Static Images & Error Handling
 - [ ] Fetching a Single Post
 - [ ] Uploading Images
