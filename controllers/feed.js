@@ -20,18 +20,26 @@ exports.getPosts = (req, res, next) => {
 
 exports.createPost = (req, res, next) => {
   const errors = validationResult(req);
+  const image = req.file; // Here you get an object from multer with information from the file uploaded (or undefined if rejected)
   if (!errors.isEmpty()) {
     const error = new Error("Validation failed, entered data is incorrect.");
-    error.statusCode = 422;
+    error.statusCode = 422; // Unprocessable Entity (Validation error)
     throw error;
   }
+  if (!image) {
+    const error = new Error("No image provided.");
+    error.statusCode = 422; // Unprocessable Entity (Validation error)
+    throw error;
+  }
+  const imageUrl = image.path.replace("\\" ,"/"); // Getting the image path to store in the DB and fetch the image later
+  console.log(imageUrl);
   const title = req.body.title;
   const content = req.body.content;
   // We don't need to add createdAt, mongoose will add automatically because of "timestamp: true"
   const post = new Post({
     title: title,
     content: content,
-    imageUrl: "images/book2.png",
+    imageUrl: imageUrl,
     creator: { name: "Rodrigo" },
   });
   post

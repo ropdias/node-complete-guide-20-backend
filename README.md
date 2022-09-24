@@ -25,7 +25,7 @@ Section 25 covered:
 - [x] Storing Posts in the Database
 - [x] Static Images & Error Handling
 - [x] Fetching a Single Post
-- [ ] Uploading Images
+- [x] Uploading Images
 - [ ] Updating Posts
 - [ ] Deleting Posts
 - [ ] Adding Pagination
