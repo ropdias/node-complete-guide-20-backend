@@ -3,20 +3,19 @@ const { validationResult } = require("express-validator");
 const Post = require("../models/post");
 
 exports.getPosts = (req, res, next) => {
-  res.status(200).json({
-    posts: [
-      {
-        _id: "1",
-        title: "First Post",
-        content: "This is the first post!",
-        imageUrl: "images/book2.png",
-        creator: {
-          name: "Rodrigo",
-        },
-        createdAt: new Date(),
-      },
-    ],
-  });
+  Post.find()
+    .then((posts) => {
+      res
+        .status(200)
+        .json({ message: "Fetched posts successfully.", posts: posts });
+    })
+    .catch((err) => {
+      // Just to check if we added a statusCode already
+      if (!err.statusCode) {
+        err.statusCode = 500; // Server Side error.
+      }
+      next(err);
+    });
 };
 
 exports.createPost = (req, res, next) => {
@@ -32,7 +31,7 @@ exports.createPost = (req, res, next) => {
   const post = new Post({
     title: title,
     content: content,
-    imageUrl: 'images/book2.png',
+    imageUrl: "images/book2.png",
     creator: { name: "Rodrigo" },
   });
   post
@@ -47,7 +46,27 @@ exports.createPost = (req, res, next) => {
     .catch((err) => {
       // Just to check if we added a statusCode already
       if (!err.statusCode) {
-        err.statusCode = 500; // Its some server side error.
+        err.statusCode = 500; // Server Side error.
+      }
+      next(err);
+    });
+};
+
+exports.getPost = (req, res, next) => {
+  const postId = req.params.postId;
+  Post.findById(postId)
+    .then((post) => {
+      if (!post) {
+        const error = new Error("Could not find post.");
+        error.statusCode = 404; // Not Found error
+        throw error; // catch() will catch this and forward with next()
+      }
+      res.status(200).json({ message: "Post fetched.", post: post });
+    })
+    .catch((err) => {
+      // Just to check if we added a statusCode already
+      if (!err.statusCode) {
+        err.statusCode = 500; // Server Side error.
       }
       next(err);
     });

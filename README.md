@@ -24,7 +24,7 @@ Section 25 covered:
 - [x] Setting Up a Post Model
 - [x] Storing Posts in the Database
 - [x] Static Images & Error Handling
-- [ ] Fetching a Single Post
+- [x] Fetching a Single Post
 - [ ] Uploading Images
 - [ ] Updating Posts
 - [ ] Deleting Posts
