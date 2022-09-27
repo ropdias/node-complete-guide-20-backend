@@ -124,3 +124,36 @@ exports.updatePost = (req, res, next) => {
       next(err);
     });
 };
+
+exports.deletePost = (req, res, next) => {
+  const postId = req.params.postId;
+  Post.findById(postId)
+    .then((post) => {
+      if (!post) {
+        const error = new Error("Could not find post.");
+        error.statusCode = 404; // Not Found error
+        throw error; // catch() will catch this and forward with next()
+      }
+      // Check logged in user later
+      const promiseDeleteImage = unlink(post.imageUrl);
+      const promiseDeletePost = Post.findByIdAndRemove(postId);
+      return Promise.allSettled([promiseDeleteImage, promiseDeletePost]);
+    })
+    .then((results) => {
+      if (
+        results[0].status !== "fulfilled" &&
+        results[1].status !== "fulfilled"
+      ) {
+        throw new Error("Deleting image and the post failed."); // catch() will catch this and forward with next()
+      } else if (results[0].status !== "fulfilled") {
+        throw new Error("Deleting image failed."); // catch() will catch this and forward with next()
+      } else if (results[1].status !== "fulfilled") {
+        throw new Error("Deleting post failed."); // catch() will catch this and forward with next()
+      } else {
+        res.status(200).json({ message: "Deleted post." });
+      }
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
