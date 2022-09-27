@@ -33,7 +33,8 @@ app.use((error, req, res, next) => {
   console.log(error);
   const status = error.statusCode || 500; // Will be 500 if statusCode is undefined
   const message = error.message; // This property exists by default and it holds the message you pass to the constructor of the error
-  res.status(status).json({ message: message });
+  const data = error.data; // This is optional, just to demonstrate how we could keep our original errors and pass to the frontend
+  res.status(status).json({ message: message, data: data });
 });
 
 mongoose

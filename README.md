@@ -30,7 +30,7 @@ Section 25 covered:
 - [x] Deleting Posts
 - [x] Adding Pagination
 - [x] Adding a User Model
-- [ ] Adding User Signup Validation
+- [x] Adding User Signup Validation
 - [ ] Signing Users Up
 - [ ] How Does Authentication Work?
 - [ ] Starting with User Login
