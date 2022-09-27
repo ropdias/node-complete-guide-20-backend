@@ -28,7 +28,7 @@ Section 25 covered:
 - [x] Uploading Images
 - [x] Updating Posts
 - [x] Deleting Posts
-- [ ] Adding Pagination
+- [x] Adding Pagination
 - [ ] Adding a User Model
 - [ ] Adding User Signup Validation
 - [ ] Signing Users Up
