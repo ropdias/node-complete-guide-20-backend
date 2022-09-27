@@ -10,7 +10,7 @@ const feedRoutes = require("./routes/feed");
 const app = express();
 
 // app.use(bodyParser.urlencoded()); // x-www-form-urlencoded <form>
-app.use(bodyParser.json()); // application/json
+// app.use(bodyParser.json()); // application/json
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.use((req, res, next) => {

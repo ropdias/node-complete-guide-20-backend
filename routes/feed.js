@@ -51,4 +51,14 @@ router.post(
 
 router.get("/post/:postId", feedController.getPost);
 
+router.put(
+  "/post/:postId",
+  upload.single("image"), // We will extract the body and a single file (single()) stored in some field named "image" in the incoming requests
+  [
+    body("title").trim().isLength({ min: 5 }),
+    body("content").trim().isLength({ min: 5 }),
+  ],
+  feedController.updatePost
+);
+
 module.exports = router;

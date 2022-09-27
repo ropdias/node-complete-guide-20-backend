@@ -26,7 +26,7 @@ Section 25 covered:
 - [x] Static Images & Error Handling
 - [x] Fetching a Single Post
 - [x] Uploading Images
-- [ ] Updating Posts
+- [x] Updating Posts
 - [ ] Deleting Posts
 - [ ] Adding Pagination
 - [ ] Adding a User Model
