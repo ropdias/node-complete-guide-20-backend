@@ -38,7 +38,7 @@ Section 25 covered:
 - [x] Using & Validating the Token
 - [x] Adding Auth Middleware to All Routes
 - [x] Connecting Posts & Users
-- [ ] Adding Authorization Checks
+- [x] Adding Authorization Checks
 - [ ] Clearing Post-User Relations
 
 

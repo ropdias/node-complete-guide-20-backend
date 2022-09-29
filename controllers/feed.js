@@ -130,11 +130,17 @@ exports.updatePost = (req, res, next) => {
   }
 
   Post.findById(postId)
+    .populate({ path: "creator", select: "name" }) // Using populate to get the name of the creator
     .then((post) => {
       if (!post) {
         const error = new Error("Could not find post.");
         error.statusCode = 404; // Not Found error
         throw error; // catch() will catch this and forward with next()
+      }
+      if (post.creator._id.toString() !== req.userId) {
+        const error = new Error("Not authorized!");
+        error.statusCode = 403; // Forbidden
+        throw error;
       }
       post.title = updatedTitle;
       post.content = updatedContent;
@@ -148,7 +154,11 @@ exports.updatePost = (req, res, next) => {
       }
     })
     .then((result) => {
-      res.status(200).json({ message: "Post updated!", post: result });
+      res.status(200).json({
+        message: "Post updated!",
+        post: result,
+        creator: { _id: result.creator._id, name: result.creator.name },
+      });
     })
     .catch((err) => {
       next(err);
@@ -163,6 +173,11 @@ exports.deletePost = (req, res, next) => {
         const error = new Error("Could not find post.");
         error.statusCode = 404; // Not Found error
         throw error; // catch() will catch this and forward with next()
+      }
+      if (post.creator.toString() !== req.userId) {
+        const error = new Error("Not authorized!");
+        error.statusCode = 403; // Forbidden
+        throw error;
       }
       // Check logged in user later
       const promiseDeleteImage = unlink(post.imageUrl);
