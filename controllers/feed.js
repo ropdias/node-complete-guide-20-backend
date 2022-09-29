@@ -2,6 +2,7 @@ const { validationResult } = require("express-validator");
 const { unlink } = require("fs/promises");
 
 const Post = require("../models/post");
+const User = require("../models/user");
 
 exports.getPosts = (req, res, next) => {
   const currentPage = +req.query.page || 1;
@@ -13,7 +14,8 @@ exports.getPosts = (req, res, next) => {
       totalItems = numPosts;
       return Post.find()
         .skip((currentPage - 1) * perPage)
-        .limit(perPage);
+        .limit(perPage)
+        .populate({ path: "creator", select: "name" }); // Using populate to get the name of the creator
     })
     .then((posts) => {
       res.status(200).json({
@@ -51,20 +53,35 @@ exports.createPost = (req, res, next) => {
   const imageUrl = image.path.replace("\\", "/"); // Getting the image path to store in the DB and fetch the image later
   const title = req.body.title;
   const content = req.body.content;
+  let creator;
   // We don't need to add createdAt, mongoose will add automatically because of "timestamp: true"
   const post = new Post({
     title: title,
     content: content,
     imageUrl: imageUrl,
-    creator: { name: "Rodrigo" },
+    creator: req.userId, // This will be a string not an object but mongoose will convert it for us
   });
   post
     .save()
     .then((result) => {
-      console.log(result);
-      res.status(201).json({ // 201 Created
+      return User.findById(req.userId);
+    })
+    .then((user) => {
+      if (!user) {
+        const error = new Error("A user with this id could not be found.");
+        error.statusCode = 422; // Unprocessable Entity (Validation error)
+        throw error; // catch() will catch this and forward with next()
+      }
+      creator = user;
+      user.posts.push(post); // Here mongoose will do all the heavy lifting of pulling out the post ID and adding that to the user actually
+      return user.save();
+    })
+    .then((result) => {
+      res.status(201).json({
+        // 201 Created
         message: "Post created successfully!",
-        post: result,
+        post: post,
+        creator: { _id: creator._id, name: creator.name },
       });
     })
     .catch((err) => {
@@ -75,6 +92,7 @@ exports.createPost = (req, res, next) => {
 exports.getPost = (req, res, next) => {
   const postId = req.params.postId;
   Post.findById(postId)
+    .populate({ path: "creator", select: "name" }) // Using populate to get the name of the creator
     .then((post) => {
       if (!post) {
         const error = new Error("Could not find post.");

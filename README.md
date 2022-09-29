@@ -37,7 +37,7 @@ Section 25 covered:
 - [x] Logging In & Creating JSON Web Tokens (JWTs)
 - [x] Using & Validating the Token
 - [x] Adding Auth Middleware to All Routes
-- [ ] Connecting Posts & Users
+- [x] Connecting Posts & Users
 - [ ] Adding Authorization Checks
 - [ ] Clearing Post-User Relations
 
