@@ -35,7 +35,7 @@ Section 25 covered:
 - [x] How Does Authentication Work?
 - [x] Starting with User Login
 - [x] Logging In & Creating JSON Web Tokens (JWTs)
-- [ ] Using & Validating the Token
+- [x] Using & Validating the Token
 - [ ] Adding Auth Middleware to All Routes
 - [ ] Connecting Posts & Users
 - [ ] Adding Authorization Checks
