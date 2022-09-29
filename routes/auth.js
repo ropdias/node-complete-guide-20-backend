@@ -39,4 +39,7 @@ router.put(
   authController.signup
 );
 
+// We could add validation to the email/password in the login but we will check the email/password pair in the DB anyways.
+router.post('/login', bodyParser.json());
+
 module.exports = router;

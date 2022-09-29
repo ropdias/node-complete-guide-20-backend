@@ -32,8 +32,8 @@ Section 25 covered:
 - [x] Adding a User Model
 - [x] Adding User Signup Validation
 - [x] Signing Users Up
-- [ ] How Does Authentication Work?
-- [ ] Starting with User Login
+- [x] How Does Authentication Work?
+- [x] Starting with User Login
 - [ ] Logging In & Creating JSON Web Tokens (JWTs)
 - [ ] Using & Validating the Token
 - [ ] Adding Auth Middleware to All Routes
