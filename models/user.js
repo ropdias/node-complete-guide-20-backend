@@ -16,7 +16,9 @@ const userSchema = new Schema({
   },
   status: {
     type: String,
-    required: true,
+    // We are setting a default value here
+    // so we don't need to set when we create a new one and every new user will start with this
+    default: "I am new!",
   },
   posts: [
     {

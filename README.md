@@ -31,7 +31,7 @@ Section 25 covered:
 - [x] Adding Pagination
 - [x] Adding a User Model
 - [x] Adding User Signup Validation
-- [ ] Signing Users Up
+- [x] Signing Users Up
 - [ ] How Does Authentication Work?
 - [ ] Starting with User Login
 - [ ] Logging In & Creating JSON Web Tokens (JWTs)

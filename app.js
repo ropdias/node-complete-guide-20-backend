@@ -2,7 +2,6 @@ const path = require("path");
 
 require("dotenv").config();
 const express = require("express");
-const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const feedRoutes = require("./routes/feed");
@@ -10,8 +9,6 @@ const authRoutes = require("./routes/auth");
 
 const app = express();
 
-// app.use(bodyParser.urlencoded()); // x-www-form-urlencoded <form>
-// app.use(bodyParser.json()); // application/json
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.use((req, res, next) => {
