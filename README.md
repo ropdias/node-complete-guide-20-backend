@@ -39,7 +39,7 @@ Section 25 covered:
 - [x] Adding Auth Middleware to All Routes
 - [x] Connecting Posts & Users
 - [x] Adding Authorization Checks
-- [ ] Clearing Post-User Relations
+- [x] Clearing Post-User Relations
 
 
 

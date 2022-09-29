@@ -195,8 +195,15 @@ exports.deletePost = (req, res, next) => {
       } else if (results[1].status !== "fulfilled") {
         throw new Error("Deleting post failed."); // catch() will catch this and forward with next()
       } else {
-        res.status(200).json({ message: "Deleted post." });
+        return User.findById(req.userId);
       }
+    })
+    .then((user) => {
+      user.posts.pull(postId);
+      return user.save();
+    })
+    .then((result) => {
+      res.status(200).json({ message: "Deleted post." });
     })
     .catch((err) => {
       next(err);
