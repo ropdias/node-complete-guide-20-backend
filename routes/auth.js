@@ -40,6 +40,6 @@ router.put(
 );
 
 // We could add validation to the email/password in the login but we will check the email/password pair in the DB anyways.
-router.post('/login', bodyParser.json());
+router.post("/login", bodyParser.json(), authController.login);
 
 module.exports = router;
