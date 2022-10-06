@@ -209,3 +209,41 @@ exports.deletePost = (req, res, next) => {
       next(err);
     });
 };
+
+exports.getUserStatus = (req, res, next) => {
+  User.findById(req.userId)
+    .then((user) => {
+      if (!user) {
+        const error = new Error("A user with this id could not be found.");
+        error.statusCode = 422; // Unprocessable Entity (Validation error)
+        throw error; // catch() will catch this and forward with next()
+      }
+      res.status(200).json({
+        message: "Fetched status successfully.",
+        status: user.status,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
+exports.updateUserStatus = (req, res, next) => {
+  const newStatus = req.body.status;
+  User.findById(req.userId)
+    .then((user) => {
+      if (!user) {
+        const error = new Error("A user with this id could not be found.");
+        error.statusCode = 422; // Unprocessable Entity (Validation error)
+        throw error; // catch() will catch this and forward with next()
+      }
+      user.status = newStatus;
+      return user.save();
+    })
+    .then((result) => {
+      res.status(200).json({ message: "Status updated successfully!" });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};

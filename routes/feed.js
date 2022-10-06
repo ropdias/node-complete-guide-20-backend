@@ -1,5 +1,6 @@
 const express = require("express");
 const { body } = require("express-validator");
+const bodyParser = require("body-parser");
 const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
 
@@ -65,5 +66,15 @@ router.put(
 );
 
 router.delete("/post/:postId", isAuth, feedController.deletePost);
+
+router.get("/status", isAuth, feedController.getUserStatus);
+
+router.patch(
+  "/status",
+  bodyParser.json(),
+  isAuth,
+  [body("status").trim().not().isEmpty()],
+  feedController.updateUserStatus
+);
 
 module.exports = router;
