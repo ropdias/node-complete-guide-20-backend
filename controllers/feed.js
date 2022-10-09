@@ -160,14 +160,14 @@ exports.deletePost = async (req, res, next) => {
       error.statusCode = 403; // Forbidden
       throw error;
     }
-    // Check logged in user later
     const promiseDeleteImage = unlink(post.imageUrl);
-    const promiseDeletePost = Post.findByIdAndRemove(postId);
+    const promiseDeletePost = Post.findByIdAndRemove(postId).then(() => {
+      return User.updateOne({ _id: req.userId }, { $pull: { posts: postId } });
+    });
     const results = await Promise.allSettled([
       promiseDeleteImage,
       promiseDeletePost,
     ]);
-    let user;
     if (
       results[0].status !== "fulfilled" &&
       results[1].status !== "fulfilled"
@@ -178,11 +178,8 @@ exports.deletePost = async (req, res, next) => {
     } else if (results[1].status !== "fulfilled") {
       throw new Error("Deleting post failed."); // catch() will catch this and forward with next()
     } else {
-      user = await User.findById(req.userId);
+      res.status(200).json({ message: "Deleted post." });
     }
-    user.posts.pull(postId);
-    await user.save();
-    res.status(200).json({ message: "Deleted post." });
   } catch (err) {
     next(err);
   }
