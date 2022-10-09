@@ -1,6 +1,6 @@
 # Node.js: Working with REST APIs - The Basics & The Practical Application (BACK-END)
 
-Examples from the **"Section 24: Working with REST APIs - The Basics"** and **"Section 25: Working with REST APIs - The Practical Application"** of the course **"NodeJS - The Complete Guide (MVC, REST APIs, GraphQL, Deno)"** by Academind (Maximilian Schwarzmüller).
+Examples from the **"Section 24: Working with REST APIs - The Basics"** and **"Section 25: Working with REST APIs - The Practical Application"** and **"Section 26: Understanding Async Await in Node.js"** of the course **"NodeJS - The Complete Guide (MVC, REST APIs, GraphQL, Deno)"** by Academind (Maximilian Schwarzmüller).
 
 Section 24 covered:
 
@@ -41,6 +41,11 @@ Section 25 covered:
 - [x] Adding Authorization Checks
 - [x] Clearing Post-User Relations
 
+Section 26 covered:
+
+- [X] What is Async Await All About?
+- [x] Transforming "Then Catch" to "Async Await"
+- [x] Top-level "await"
 
 
 More info: https://www.udemy.com/course/nodejs-the-complete-guide/
