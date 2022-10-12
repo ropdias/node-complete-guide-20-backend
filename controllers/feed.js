@@ -142,6 +142,7 @@ exports.updatePost = async (req, res, next) => {
       post.imageUrl = image.path.replace("\\", "/"); // Getting the image path to store in the DB and fetch the image later;
     }
     const result = await post.save();
+    getIO().emit("posts", { action: "update", post: result });
     res.status(200).json({
       message: "Post updated!",
       post: result,

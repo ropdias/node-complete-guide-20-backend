@@ -57,7 +57,7 @@ Section 27 covered:
 - [x] Sharing the IO Instance Across Files
 - [x] Synchronizing POST Additions
 - [x] Fixing a Bug - The Missing Username
-- [ ] Updating Posts On All Connected Clients
+- [x] Updating Posts On All Connected Clients
 - [ ] Sorting Correctly
 - [ ] Deleting Posts Across Clients
 
