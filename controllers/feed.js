@@ -63,7 +63,12 @@ exports.createPost = async (req, res, next) => {
     }
     user.posts.push(post); // Here mongoose will do all the heavy lifting of pulling out the post ID and adding that to the user actually
     await user.save();
-    getIO().emit('posts', { action: 'create', post: post });
+    // await post.populate({ path: "creator", select: "name" }); // Using populate to get the name of the creator
+    getIO().emit("posts", {
+      action: "create",
+      // Instead of using populate to get all the information from the creator we can directly get the information from post and create a new object
+      post: { ...post._doc, creator: { _id: user._id, name: user.name } }, // Here we are sending the entire post._doc data and changing the creator
+    });
     res.status(201).json({
       // 201 Created
       message: "Post created successfully!",
