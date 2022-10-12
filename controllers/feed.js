@@ -187,6 +187,7 @@ exports.deletePost = async (req, res, next) => {
     } else if (results[1].status !== "fulfilled") {
       throw new Error("Deleting post failed."); // catch() will catch this and forward with next()
     } else {
+      getIO().emit("posts", { action: "delete", post: postId });
       res.status(200).json({ message: "Deleted post." });
     }
   } catch (err) {

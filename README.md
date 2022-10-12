@@ -59,6 +59,6 @@ Section 27 covered:
 - [x] Fixing a Bug - The Missing Username
 - [x] Updating Posts On All Connected Clients
 - [x] Sorting Correctly
-- [ ] Deleting Posts Across Clients
+- [x] Deleting Posts Across Clients
 
 More info: https://www.udemy.com/course/nodejs-the-complete-guide/
