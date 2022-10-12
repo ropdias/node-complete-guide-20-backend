@@ -53,7 +53,7 @@ Section 27 covered:
 - [x] Websocket Solutions - An Overview
 - [x] Setting Up Socket.io on the Server
 - [x] Establishing a Connection From the Client
-- [ ] Identifying Realtime Potential
+- [x] Identifying Realtime Potential
 - [ ] Sharing the IO Instance Across Files
 - [ ] Synchronizing POST Additions
 - [ ] Fixing a Bug - The Missing Username
