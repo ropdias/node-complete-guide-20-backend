@@ -3,8 +3,8 @@ const path = require("path");
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const { Server } = require("socket.io");
 
+const { initIO } = require("./socket");
 const feedRoutes = require("./routes/feed");
 const authRoutes = require("./routes/auth");
 
@@ -39,11 +39,7 @@ mongoose
   .connect(process.env.MONGODB_URI)
   .then((result) => {
     const server = app.listen(8080);
-    const io = new Server(server, {
-      cors: {
-        origin: "http://localhost:3000", // To allow all origins you could use "*"
-      },
-    });
+    const io = initIO(server);
     io.on("connection", (socket) => {
       console.log("Client connected");
     });

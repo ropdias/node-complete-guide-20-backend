@@ -54,7 +54,7 @@ Section 27 covered:
 - [x] Setting Up Socket.io on the Server
 - [x] Establishing a Connection From the Client
 - [x] Identifying Realtime Potential
-- [ ] Sharing the IO Instance Across Files
+- [x] Sharing the IO Instance Across Files
 - [ ] Synchronizing POST Additions
 - [ ] Fixing a Bug - The Missing Username
 - [ ] Updating Posts On All Connected Clients
