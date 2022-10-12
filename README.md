@@ -1,6 +1,6 @@
 # Node.js: Working with REST APIs - The Basics & The Practical Application (BACK-END)
 
-Examples from the **"Section 24: Working with REST APIs - The Basics"** and **"Section 25: Working with REST APIs - The Practical Application"** and **"Section 26: Understanding Async Await in Node.js"** of the course **"NodeJS - The Complete Guide (MVC, REST APIs, GraphQL, Deno)"** by Academind (Maximilian Schwarzmüller).
+Examples from the **"Section 24: Working with REST APIs - The Basics"** and **"Section 25: Working with REST APIs - The Practical Application"** and **"Section 26: Understanding Async Await in Node.js"** and **"Section 27: Understanding Websockets & Socket.io"** of the course **"NodeJS - The Complete Guide (MVC, REST APIs, GraphQL, Deno)"** by Academind (Maximilian Schwarzmüller).
 
 Section 24 covered:
 
@@ -47,5 +47,18 @@ Section 26 covered:
 - [x] Transforming "Then Catch" to "Async Await"
 - [x] Top-level "await"
 
+Section 27 covered:
+
+- [x] What Are Websockets & Why Would You Use Them?
+- [x] Websocket Solutions - An Overview
+- [x] Setting Up Socket.io on the Server
+- [x] Establishing a Connection From the Client
+- [ ] Identifying Realtime Potential
+- [ ] Sharing the IO Instance Across Files
+- [ ] Synchronizing POST Additions
+- [ ] Fixing a Bug - The Missing Username
+- [ ] Updating Posts On All Connected Clients
+- [ ] Sorting Correctly
+- [ ] Deleting Posts Across Clients
 
 More info: https://www.udemy.com/course/nodejs-the-complete-guide/
