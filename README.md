@@ -58,7 +58,7 @@ Section 27 covered:
 - [x] Synchronizing POST Additions
 - [x] Fixing a Bug - The Missing Username
 - [x] Updating Posts On All Connected Clients
-- [ ] Sorting Correctly
+- [x] Sorting Correctly
 - [ ] Deleting Posts Across Clients
 
 More info: https://www.udemy.com/course/nodejs-the-complete-guide/

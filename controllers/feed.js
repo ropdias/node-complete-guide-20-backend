@@ -13,6 +13,7 @@ exports.getPosts = async (req, res, next) => {
     const posts = await Post.find()
       .skip((currentPage - 1) * perPage)
       .limit(perPage)
+      .sort({createdAt: -1})
       .populate({ path: "creator", select: "name" }); // Using populate to get the name of the creator
 
     res.status(200).json({
