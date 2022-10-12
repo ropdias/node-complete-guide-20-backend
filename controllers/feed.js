@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator");
 const { unlink } = require("fs/promises");
 
+const { getIO } = require("../socket");
 const Post = require("../models/post");
 const User = require("../models/user");
 
@@ -62,6 +63,7 @@ exports.createPost = async (req, res, next) => {
     }
     user.posts.push(post); // Here mongoose will do all the heavy lifting of pulling out the post ID and adding that to the user actually
     await user.save();
+    getIO().emit('posts', { action: 'create', post: post });
     res.status(201).json({
       // 201 Created
       message: "Post created successfully!",
