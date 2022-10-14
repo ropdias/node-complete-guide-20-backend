@@ -12,6 +12,7 @@ router.put(
   bodyParser.json(),
   [
     body("email")
+      .normalizeEmail() // Sanitizer to normalize e-mail addresses
       .isEmail()
       .withMessage("Please enter a valid e-mail.")
       .custom((value, { req }) => {
@@ -22,8 +23,7 @@ router.put(
             );
           }
         });
-      })
-      .normalizeEmail(), // Sanitizer to normalize e-mail addresses
+      }),
     body(
       "password",
       "Please enter a password with only numbers and text and at least 5 characters"
@@ -31,7 +31,7 @@ router.put(
       .trim() // Sanitizer to remove spaces
       .isLength({ min: 5 }) // This is just a demonstration, in production it should have more characters
       .isAlphanumeric(), // This is just a demonstration, in production we should allow special characters
-    body("name")
+    body("name", "Please enter a name")
       .trim() // Sanitizer to remove spaces
       .not() // To check if it's not empty
       .isEmpty(),

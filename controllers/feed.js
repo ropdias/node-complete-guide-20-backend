@@ -13,7 +13,7 @@ exports.getPosts = async (req, res, next) => {
     const posts = await Post.find()
       .skip((currentPage - 1) * perPage)
       .limit(perPage)
-      .sort({createdAt: -1})
+      .sort({ createdAt: -1 })
       .populate({ path: "creator", select: "name" }); // Using populate to get the name of the creator
 
     res.status(200).json({
@@ -47,34 +47,41 @@ exports.createPost = async (req, res, next) => {
   const imageUrl = image.path.replace("\\", "/"); // Getting the image path to store in the DB and fetch the image later
   const title = req.body.title;
   const content = req.body.content;
-  // We don't need to add createdAt, mongoose will add automatically because of "timestamp: true"
-  const post = new Post({
-    title: title,
-    content: content,
-    imageUrl: imageUrl,
-    creator: req.userId, // This will be a string not an object but mongoose will convert it for us
-  });
+
   try {
-    await post.save();
     const user = await User.findById(req.userId);
     if (!user) {
       const error = new Error("A user with this id could not be found.");
       error.statusCode = 422; // Unprocessable Entity (Validation error)
       throw error; // catch() will catch this and forward with next()
     }
-    user.posts.push(post); // Here mongoose will do all the heavy lifting of pulling out the post ID and adding that to the user actually
+    // We don't need to add createdAt, mongoose will add automatically because of "timestamp: true"
+    const post = new Post({
+      title: title,
+      content: content,
+      imageUrl: imageUrl,
+      creator: user._id,
+    });
+    const createdPost = await post.save();
+    user.posts.push(createdPost); // Here mongoose will do all the heavy lifting of pulling out the post ID and adding that to the user actually
     await user.save();
     // await post.populate({ path: "creator", select: "name" }); // Using populate to get the name of the creator
     getIO().emit("posts", {
       action: "create",
       // Instead of using populate to get all the information from the creator we can directly get the information from post and create a new object
-      post: { ...post._doc, creator: { _id: user._id, name: user.name } }, // Here we are sending the entire post._doc data and changing the creator
+      post: {
+        ...createdPost._doc,
+        creator: { _id: user._id, name: user.name },
+      }, // Here we are sending the entire post._doc data and changing the creator
     });
     res.status(201).json({
       // 201 Created
       message: "Post created successfully!",
-      post: post,
-      creator: { _id: user._id, name: user.name },
+      post: {
+        ...createdPost._doc,
+        creator: { _id: user._id, name: user.name },
+      },
+      // creator: { _id: user._id, name: user.name },
     });
   } catch (err) {
     next(err);
